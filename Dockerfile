@@ -11,4 +11,4 @@ COPY target/*.war .
 EXPOSE 8080
 
 #container start point (start tomcat)
-CMD ["catalina.sh", "run"]
+CMD ["catalina.sh", "run"] 
