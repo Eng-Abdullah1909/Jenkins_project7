@@ -1,6 +1,6 @@
 -
   name: Deployment
-  hosts: local-host
+  hosts: localhost
   tasks:
 
     - name: stop previous container with same name
