@@ -1,0 +1,25 @@
+-
+  name: Deployment
+  hosts: local-host
+  tasks:
+
+    - name: stop previous container with same name
+      command: docker stop petstore-webapp-container
+      igonre_errors: yes
+
+    - name: remove previous container with same name
+      command: docker rm petstore-webapp-container
+      igonre_errors: yes
+
+    - name: remove previous image with same name
+      command: docker rmi $(Image_name)
+      igonre_errors: yes
+
+    - name: building the image
+      command: docker build -t $(Image_name) .
+
+    - name: push the image to Docker-hub
+      command: docker push $(Image_name)
+
+    - name: run a container from pushed image
+      command: docker run -d -p 8080:8080 --name  petstore-webapp-container $(Image_name)
