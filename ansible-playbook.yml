@@ -12,14 +12,14 @@
       ignore_errors: yes
 
     - name: remove previous image with same name
-      command: docker rmi $(Image_name)
+      command: docker rmi engabdullah1909/jpetstore-webapp
       ignore_errors: yes
 
     - name: building the image
-      command: docker build -t $(Image_name) .
+      command: docker build -t engabdullah1909/jpetstore-webapp .
 
     - name: push the image to Docker-hub
-      command: docker push $(Image_name)
+      command: docker push $engabdullah1909/jpetstore-webapp
 
     - name: run a container from pushed image
-      command: docker run -d -p 8080:8080 --name  petstore-webapp-container $(Image_name)
+      command: docker run -d -p 8080:8080 --name  petstore-webapp-container engabdullah1909/jpetstore-webapp

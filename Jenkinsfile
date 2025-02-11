@@ -3,7 +3,6 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('Docker-Hub-UP')
-        Image_name = "engabdullah1909/jpetstore-webapp"
 
     }   
 
