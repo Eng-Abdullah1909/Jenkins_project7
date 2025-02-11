@@ -1,17 +1,17 @@
 pipeline {
     agent any
 
-environment {
-  DOCKERHUB_CREDENTIALS = "Docker-Hub-UP"
-  Image_name = "engabdullah1909/jpetstore-webapp"
+    environment {
+        DOCKERHUB_CREDENTIALS = "Docker-Hub-UP"
+        Image_name = "engabdullah1909/jpetstore-webapp"
 
-}
+    }   
 
 
     stages {
-        stage('build-SRC'){    
+        stage('build-SRC') {    
             //building the code using Maven build tool        
-            sh ('mvn clean validate')
+            sh 'mvn clean validate'
 
         }
 
