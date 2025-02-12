@@ -22,4 +22,4 @@
       command: docker push engabdullah1909/jpetstore-webapp
 
     - name: run a container from pushed image
-      command: docker run -d -p 8080:8080 --name  petstore-webapp-container engabdullah1909/jpetstore-webapp
+      command: docker run -d -p 8080:8080 --name petstore-webapp-container engabdullah1909/jpetstore-webapp
