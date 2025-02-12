@@ -12,8 +12,8 @@ pipeline {
             //steps{
             //building the code using Maven build tool        
             //sh 'mvn clean package'
-            //}
-        //}
+            }
+        }
 
         stage('Docker Login') {
             steps {
