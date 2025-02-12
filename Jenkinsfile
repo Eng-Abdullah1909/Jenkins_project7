@@ -8,12 +8,12 @@ pipeline {
 
 
     stages {
-        //stage('build-SRC') {    
-            //steps{
+        stage('build-SRC') {    
+            steps{
             //building the code using Maven build tool        
-            //sh 'mvn clean package'
-            //}
-        //}
+            sh 'mvn clean package'
+            }
+        }
 
         stage('Docker Login') {
             steps {
