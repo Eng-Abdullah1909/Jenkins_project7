@@ -8,10 +8,16 @@ pipeline {
 
 
     stages {
+         stage('Checkout from Git') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Eng-Abdullah1909/DEPI-Final-Project.git'
+                     
+            }
+        }       
         stage('build-SRC') {    
             steps{
-            //building the code using Maven build tool        
-            sh 'mvn clean package'
+                //building the code using Maven build tool        
+                sh 'mvn clean package'
             }
         }
 
