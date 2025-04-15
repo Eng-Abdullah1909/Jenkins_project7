@@ -16,7 +16,7 @@ pipeline {
         }       
         stage('build-SRC') {    
             steps{
-                //building the code using Maven build tool        
+                building the code using Maven build tool        
                 sh 'mvn clean package'
             }
         }
