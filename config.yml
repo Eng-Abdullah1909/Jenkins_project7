@@ -1,0 +1,13 @@
+startDelaySeconds: 0
+jmxUrl: ""
+username: ""
+password: ""
+lowercaseOutputName: true
+lowercaseOutputLabelNames: true
+rules:
+  - pattern: 'java.lang:type=MemoryPool,name=(.*)'
+    name: java_memory_pool_usage
+    type: GAUGE
+    attr: Usage.used
+    labels:
+      pool: "$1"

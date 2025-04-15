@@ -36,6 +36,14 @@ pipeline {
         }
 
 
+        stage('Deployment & monitoring'){
+            steps{
+                sh 'docker-compose up -d'
+            }
+
+        }
+
+
     }
 
 }
