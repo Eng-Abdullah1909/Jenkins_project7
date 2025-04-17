@@ -2,11 +2,11 @@ version: '3'
 
 services:
   webapp:
-    build: .
+    image: engabdullah1909/jpetstore-webapp
     container_name: petstore-webapp-container
     ports:
-      - "8080:8080"
-      - "8081:8081"
+      - "8085:8080"
+      - "8086:8086"
     networks:
       - monitoring
 
