@@ -29,7 +29,7 @@ services:
       - monitoring
 
 
-  node exporter:
+  node-exporter:
     image: prom/node-exporter:latest
     container_name: node-exporter
     ports:
