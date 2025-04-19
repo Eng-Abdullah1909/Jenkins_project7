@@ -16,7 +16,7 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - /tmp/prometheus.yml:/etc/prometheus/prometheus.yml
+      - /tmp/prometheus.yml:/etc/prometheus/prometheus.yml  # file-to-file
     networks:
       - monitoring
 
