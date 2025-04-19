@@ -16,11 +16,9 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - /tmp/prometheus.yml:/etc/prometheus/prometheus.yml
     networks:
       - monitoring
-    command: [ "sh", "-c", "chmod 777 /etc/prometheus/prometheus.yml && prometheus" ]
-
 
   grafana:
     image: grafana/grafana
