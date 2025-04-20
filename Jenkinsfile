@@ -34,7 +34,7 @@ pipeline {
             }
         }        
 
-        stage('pushing to dokcer rejestiry')
+        stage('pushing to dokcer rejestiry'){
             steps{
                 echo 'Building the image'               
                 //pushing the image
