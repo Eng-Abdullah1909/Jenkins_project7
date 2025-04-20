@@ -8,13 +8,13 @@ pipeline {
 
 
     stages {     
-        //stage('build-code') {    
-            //steps{
-                //echo 'Building the code using Maven'               
+        stage('build-code') {    
+            steps{
+                echo 'Building the code using Maven'               
                 //building the code using Maven build tool        
-                //sh 'mvn clean package'
-            //}
-        //}
+                sh 'mvn clean package'
+            }
+        }
 
 
 
