@@ -7,19 +7,14 @@ pipeline {
     }   
 
 
-    stages {
-         stage('Checkout from Git') {
-            steps {
-                git branch: 'main', url: 'https://github.com/Eng-Abdullah1909/DEPI-Final-Project.git'
-                     
-            }
-        }       
-        //stage('build-SRC') {    
-            //steps{
+    stages {     
+        stage('build-SRC') {    
+            steps{
+                echo 'Building the code using Maven'               
                 //building the code using Maven build tool        
-                //sh 'mvn clean package'
-            //}
-        //}
+                sh 'mvn clean package'
+            }
+        }
 
         stage('Docker Login') {
             steps {
@@ -28,22 +23,27 @@ pipeline {
             }
         }   
 
-        stage('Build & push Dockerfile'){
-            steps{
-                sh 'ansible-playbook ansible-playbook.yml'
-            }
 
+
+        stage('Security Scan-Trivy') {
+            steps {
+                echo 'Running Trivy scan on Docker image'
+                sh '''
+                    trivy image --exit-code 1 --severity CRITICAL,HIGH \
+                    -f table -o trivy-report.txt \                  // -f for format, -o for output
+                    engabdullah1909/jpetstore-webapp || true
+                '''
+                // `|| true` ensures the pipeline continues even if vulnerabilities are found
+            }
         }
 
 
-        stage('Deployment & monitoring'){
+        stage('run the app'){
             steps{
-                sh 'docker-compose up -d --build'
+                sh ' docker run --name petstore-webapp-container -p 8085:8080 engabdullah1909/jpetstore-webapp '
             }
 
-        }
-
+        }        
 
     }
-
 }
