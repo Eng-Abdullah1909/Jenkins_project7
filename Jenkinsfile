@@ -30,7 +30,7 @@ pipeline {
                 echo 'Running Trivy scan on Docker image'
                 sh '''
                     trivy image --exit-code 1 --severity CRITICAL,HIGH \
-                    -f table -o trivy-report.txt \                  // -f for format, -o for output
+                    --format table --output trivy-report.txt \                 
                     engabdullah1909/jpetstore-webapp || true
                 '''
                 // `|| true` ensures the pipeline continues even if vulnerabilities are found
