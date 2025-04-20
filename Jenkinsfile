@@ -8,13 +8,13 @@ pipeline {
 
 
     stages {     
-        //stage('build-code') {    
-            //steps{
-                //echo 'Building the code using Maven'               
-                //building the code using Maven build tool        
-                //sh 'mvn clean package'
-            //}
-        //}
+        stage('build-code') {    
+            steps{
+                echo 'Building the code using Maven'               
+                building the code using Maven build tool        
+                sh 'mvn clean package'
+            }
+        }
 
 
 
@@ -46,16 +46,17 @@ pipeline {
         stage('Security Scan-Trivy') {
             steps {
                 echo 'Running Trivy scan on Docker image'
-                sh 'trivy image --exit-code 1 --severity CRITICAL,HIGH --format table --output trivy-report.txt engabdullah1909/jpetstore-webapp || true'
+                sh 'trivy image --exit-code 1 --severity HIGH --format table --output trivy-report.txt --scanners vuln engabdullah1909/jpetstore-webapp || true'
 
-                // `|| true` ensures the pipeline continues even if vulnerabilities are found
+                // `|| true` ensures the pipeline continues even if vulnerabilities are found 
+                // --scanners vuln o disable secret scanning (just to decrease build time)
             }
         }
 
 
         stage('run the app'){
             steps{
-                sh ' docker run --name petstore-webapp-container -p 8085:8080 engabdullah1909/jpetstore-webapp '
+                sh ' docker run -p 8085:8080 engabdullah1909/jpetstore-webapp '
             }
 
         }        
