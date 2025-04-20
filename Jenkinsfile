@@ -36,7 +36,7 @@ pipeline {
 
         stage('pushing to dokcer rejestiry'){
             steps{
-                echo 'Building the image'               
+                echo 'pushing the image'               
                 //pushing the image
                 sh 'docker push engabdullah1909/jpetstore-webapp'
             }
