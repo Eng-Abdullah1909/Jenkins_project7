@@ -5,6 +5,9 @@ WORKDIR WORKDIR /usr/local/tomcat/webapps/
 
 #copy artifact inside the container into Tomcat's webapps dir
 COPY target/*.war .
+
+#copy SRC inside the container
+COPY . .
  
 #port mapping
 EXPOSE 8080
