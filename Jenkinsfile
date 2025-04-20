@@ -11,7 +11,7 @@ pipeline {
         stage('build-code') {    
             steps{
                 echo 'Building the code using Maven'               
-                building the code using Maven build tool        
+                //building the code using Maven build tool        
                 sh 'mvn clean package'
             }
         }
