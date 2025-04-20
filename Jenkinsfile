@@ -8,13 +8,13 @@ pipeline {
 
 
     stages {     
-        stage('build-code') {    
-            steps{
-                echo 'Building the code using Maven'               
+        //stage('build-code') {    
+            //steps{
+                //echo 'Building the code using Maven'               
                 //building the code using Maven build tool        
-                sh 'mvn clean package'
-            }
-        }
+                //sh 'mvn clean package'
+            //}
+        //}
 
 
 
@@ -56,7 +56,7 @@ pipeline {
 
         stage('run the app'){
             steps{
-                sh ' docker run -p 8085:8080 engabdullah1909/jpetstore-webapp '
+                sh ' docker run -p 8086:8080 engabdullah1909/jpetstore-webapp '
             }
 
         }        
