@@ -56,7 +56,7 @@ pipeline {
 
         stage('run the app'){
             steps{
-                sh ' docker run -p 8088:8080 engabdullah1909/jpetstore-webapp '
+                sh ' docker run -d -p 8088:8080 engabdullah1909/jpetstore-webapp '
             }
 
         }        
