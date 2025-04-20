@@ -8,13 +8,15 @@ pipeline {
 
 
     stages {     
-        stage('build-SRC') {    
+        stage('build-code') {    
             steps{
                 echo 'Building the code using Maven'               
                 //building the code using Maven build tool        
                 sh 'mvn clean package'
             }
         }
+
+
 
         stage('Docker Login') {
             steps {
@@ -23,6 +25,22 @@ pipeline {
             }
         }   
 
+   
+        stage('build-image') {    
+            steps{
+                echo 'Building the image'               
+                //building the code using Maven build tool        
+                sh 'docker build -t engabdullah1909/jpetstore-webapp .'
+            }
+        }        
+
+        stage('pushing to dokcer rejestiry')
+            steps{
+                echo 'Building the image'               
+                //pushing the image
+                sh 'docker push engabdullah1909/jpetstore-webapp'
+            }
+        }        
 
 
         stage('Security Scan-Trivy') {
