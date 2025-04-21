@@ -1,14 +1,16 @@
 FROM tomcat:9.0
 
 #spedifing work dirictory inside the container
-WORKDIR WORKDIR /usr/local/tomcat/webapps/
+WORKDIR  /usr/local/tomcat/webapps/
+
+
+# Clean default apps
+RUN rm -rf /usr/local/tomcat/webapps/*
+
 
 #copy artifact inside the container into Tomcat's webapps dir
-COPY target/*.war .
+COPY target/jpetstore.war /usr/local/tomcat/webapps/jpetstore.war
 
-#copy SRC inside the container
-COPY . .
- 
 #port mapping
 EXPOSE 8080
  
