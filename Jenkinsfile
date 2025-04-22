@@ -13,19 +13,7 @@ pipeline {
     
     
 
-    stages {     
-         stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('sonar-scanner') {
-                sh ''' 'sonar-scanner' \
-                -Dsonar.projectName=my-project \
-                -Dsonar.projectKey=store \
-                -Dsonar.java.binaries=target/classes \
-                -Dsonar.sources=. '''
-                }
-            }
-        }
-        
+    stages {    
         stage('build-code') {    
             steps{
                 echo 'Building the code using Maven'               
@@ -34,9 +22,20 @@ pipeline {
             }
         }
 
+        
+         stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('sonar-scanner') {
+                sh ''' sonar-scanner \
+                -Dsonar.projectName=my-project \
+                -Dsonar.projectKey=store \
+                -Dsonar.java.binaries=target/classes \
+                -Dsonar.sources=. '''
+                }
+            }
+        }
 
-
-
+        
         stage('Docker Login') {
             steps {
                 // Add --password-stdin to run docker login command non-interactively
