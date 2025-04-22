@@ -25,13 +25,17 @@ pipeline {
         
          stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('sonar-scanner') {
-                    sh ''' $SCANNER_HOME/bin/sonar-scanner \
+                withEnv(["SONAR_SCANNER_OPTS=-Dsonar.scanner.jre.enable=false"]) {
+                    withSonarQubeEnv('sonar-scanner') {
+                        sh """
+                        sonar-scanner \
                         -Dsonar.projectName=my-project \
                         -Dsonar.projectKey=store \
                         -Dsonar.java.binaries=target/classes \
-                        -Dsonar.sources=. '''
-                }
+                        -Dsonar.sources=.
+                         """
+                    }
+                 }
             }
         }
 
