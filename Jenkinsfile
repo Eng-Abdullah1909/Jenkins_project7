@@ -26,11 +26,11 @@ pipeline {
          stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonar-scanner') {
-                sh ''' sonar-scanner \
-                -Dsonar.projectName=my-project \
-                -Dsonar.projectKey=store \
-                -Dsonar.java.binaries=target/classes \
-                -Dsonar.sources=. '''
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner \
+                        -Dsonar.projectName=my-project \
+                        -Dsonar.projectKey=store \
+                        -Dsonar.java.binaries=target/classes \
+                        -Dsonar.sources=. '''
                 }
             }
         }
@@ -74,7 +74,7 @@ pipeline {
 
         stage('run the app'){
             steps{
-                sh ' docker run -d -p 8088:8080 engabdullah1909/jpetstore-webapp '
+                sh ' docker run -d -p 8085:8080 engabdullah1909/jpetstore-webapp '
             }
 
         }        
