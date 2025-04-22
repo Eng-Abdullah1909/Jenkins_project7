@@ -3,9 +3,13 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('Docker-Hub-UP')
-
     }   
 
+    tools {
+        sonarQubeScanner 'SonarServer' 
+    }
+    
+    
 
     stages {     
          stage('SonarQube Analysis') {
