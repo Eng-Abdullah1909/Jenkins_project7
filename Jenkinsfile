@@ -7,15 +7,7 @@ pipeline {
     }   
 
 
-    stages {          
-        stage('build-code') {    
-            steps{
-                echo 'Building the code using Maven'               
-                //building the code using Maven build tool        
-                sh 'mvn clean package'
-            }
-        }
-
+    stages {     
          stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarServer') {
@@ -27,6 +19,15 @@ pipeline {
                 }
             }
         }
+        
+        stage('build-code') {    
+            steps{
+                echo 'Building the code using Maven'               
+                //building the code using Maven build tool        
+                sh 'mvn clean package'
+            }
+        }
+
 
 
 
