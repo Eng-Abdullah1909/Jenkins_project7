@@ -3,10 +3,12 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('Docker-Hub-UP')
+        SCANNER_HOME=tool 'sonar-scanner'
     }   
 
     tools {
-        sonarQubeScanner 'SonarServer' 
+        jdk 'jdk11'
+        maven 'maven3'
     }
     
     
