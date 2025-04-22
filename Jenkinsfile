@@ -17,7 +17,7 @@ pipeline {
          stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarServer') {
-                sh ''' 'sonar-scanner' \
+                sh ''' 'SonarServer' \
                 -Dsonar.projectName=my-project \
                 -Dsonar.projectKey=store \
                 -Dsonar.java.binaries=target/classes \
