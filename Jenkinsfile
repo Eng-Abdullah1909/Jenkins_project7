@@ -7,12 +7,24 @@ pipeline {
     }   
 
 
-    stages {     
+    stages {          
         stage('build-code') {    
             steps{
                 echo 'Building the code using Maven'               
                 //building the code using Maven build tool        
                 sh 'mvn clean package'
+            }
+        }
+
+         stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SonarServer') {
+                sh ''' 'sonar-scanner' \
+                -Dsonar.projectName=my-project \
+                -Dsonar.projectKey=store \
+                -Dsonar.java.binaries=target/classes \
+                -Dsonar.sources=. '''
+                }
             }
         }
 
@@ -43,15 +55,15 @@ pipeline {
         }        
 
 
-        stage('Security Scan-Trivy') {
-            steps {
-                echo 'Running Trivy scan on Docker image'
-                sh 'trivy image --exit-code 1 --severity HIGH --format table --output trivy-report.txt --scanners vuln engabdullah1909/jpetstore-webapp || true'
+        //stage('Security Scan-Trivy') {
+            //steps {
+                //echo 'Running Trivy scan on Docker image'
+                //sh 'trivy image --exit-code 1 --severity HIGH --format table --output trivy-report.txt --scanners vuln engabdullah1909/jpetstore-webapp || true'
 
                 // `|| true` ensures the pipeline continues even if vulnerabilities are found 
                 // --scanners vuln o disable secret scanning (just to decrease build time)
-            }
-        }
+            //}
+        //}
 
 
         stage('run the app'){
