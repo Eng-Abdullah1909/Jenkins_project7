@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('Docker-Hub-UP')
-        SCANNER_HOME=tool 'SonarServer'
+        SCANNER_HOME=tool 'sonar-scanner'
     }   
 
     tools {
@@ -16,8 +16,8 @@ pipeline {
     stages {     
          stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarServer') {
-                sh ''' 'SonarServer' \
+                withSonarQubeEnv('sonar-scanner') {
+                sh ''' 'sonar-scanner' \
                 -Dsonar.projectName=my-project \
                 -Dsonar.projectKey=store \
                 -Dsonar.java.binaries=target/classes \
