@@ -14,17 +14,17 @@ pipeline {
     
 
     stages {     
-         stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('SonarServer') {
-                sh ''' 'sonar-scanner' \
-                -Dsonar.projectName=my-project \
-                -Dsonar.projectKey=store \
-                -Dsonar.java.binaries=target/classes \
-                -Dsonar.sources=. '''
-                }
-            }
-        }
+         //stage('SonarQube Analysis') {
+            //steps {
+                //withSonarQubeEnv('SonarServer') {
+                //sh ''' 'sonar-scanner' \
+                //-Dsonar.projectName=my-project \
+                //-Dsonar.projectKey=store \
+                //-Dsonar.java.binaries=target/classes \
+                //-Dsonar.sources=. '''
+                //}
+            //}
+        //}
         
         stage('build-code') {    
             steps{
@@ -73,12 +73,18 @@ pipeline {
         //}
 
 
-        stage('run the app'){
-            steps{
-                sh ' docker run -d -p 8088:8080 engabdullah1909/jpetstore-webapp '
-            }
+        stage('Deploy to Kubernetes') {
+            steps {
+                 echo 'Deploying to Minikube Kubernetes cluster'
 
-        }        
+                 // Create Kubernetes deployment and service
+                 sh 'kubectl apply -f k8s/deployment.yaml'
+                 sh 'kubectl apply -f k8s/service.yaml'
+
+
+            }
+        }
+   
 
     }
 }
