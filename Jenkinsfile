@@ -7,13 +7,20 @@ pipeline {
     }   
 
     tools {
-        jdk 'jdk11'
+        jdk 'jdk18'
         maven 'maven3'
     }
-    
-    
 
-    stages {     
+    stages {    
+        stage('build-code') {    
+            steps{
+                echo 'Building the code using Maven'               
+                //building the code using Maven build tool        
+                sh 'mvn clean package'
+            }
+        }
+
+           
          //stage('SonarQube Analysis') {
             //steps {
                 //withSonarQubeEnv('SonarServer') {
@@ -25,18 +32,8 @@ pipeline {
                 //}
             //}
         //}
+
         
-        stage('build-code') {     
-            steps{
-                echo 'Building the code using Maven'               
-                //building the code using Maven build tool        
-                sh 'mvn clean package'
-            }
-        }
-
-
-
-
         stage('Docker Login') {
             steps {
                 // Add --password-stdin to run docker login command non-interactively
@@ -76,7 +73,6 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                  echo 'Deploying to Minikube Kubernetes cluster'
-
                  // Create Kubernetes deployment and service
                  sh 'kubectl apply -f k8s/deployment.yaml'
                  sh 'kubectl apply -f k8s/service.yaml'
@@ -87,4 +83,5 @@ pipeline {
    
 
     }
+
 }
