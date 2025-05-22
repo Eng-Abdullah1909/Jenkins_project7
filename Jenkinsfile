@@ -80,6 +80,17 @@ pipeline {
 
             }
         }
+
+
+        stage('Security Scan - Trivy Kubernetes Cluster') {
+            steps {
+                echo 'Running Trivy scan on Kubernetes cluster'
+                sh   'trivy k8s --report summary --format table --output trivy-cluster-report.txt || true cluster '  
+                // || true ensures the pipeline doesn't fail even if issues are found.  
+                
+
+    }
+}
    
 
     }
