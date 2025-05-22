@@ -4,6 +4,7 @@ pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = credentials('Docker-Hub-UP')
         SCANNER_HOME=tool 'sonar-scanner'
+        KUBECONFIG = '/var/lib/jenkins/.kube/config'   // to force Jenkins to use it's own Kubeconfig not ~/.minikube
     }   
 
     tools {
