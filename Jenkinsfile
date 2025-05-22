@@ -54,7 +54,7 @@ pipeline {
             steps{
                 echo 'pushing the image'               
                 //pushing the image
-                sh 'docker push engabdullah1909/jpetstore-webapp${BUILD_NUMBER}'
+                sh 'docker push engabdullah1909/jpetstore-webapp:${BUILD_NUMBER}'
             }
         }        
 
