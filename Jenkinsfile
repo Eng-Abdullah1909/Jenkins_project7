@@ -42,12 +42,12 @@ pipeline {
         }   
 
    
-        stage('build-image') {
-            steps {
-                echo 'Building the image'
-                sh "docker build -t engabdullah1909/jpetstore-webapp:${BUILD_NUMBER} ."
-            }
-        }
+        // stage('build-image') {
+        //     steps {
+        //         echo 'Building the image'
+        //         sh "docker build -t engabdullah1909/jpetstore-webapp:${BUILD_NUMBER} ."
+        //     }
+        // }
    
 
         stage('pushing to dokcer rejestiry'){
