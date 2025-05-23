@@ -64,8 +64,8 @@ pipeline {
                 echo 'Running Trivy scan on Docker image'
                 sh 'trivy image --exit-code 1 --severity HIGH --format table --output trivy-report.txt --scanners vuln engabdullah1909/jpetstore-webapp || true'
 
-                `|| true` ensures the pipeline continues even if vulnerabilities are found 
-                --scanners vuln o disable secret scanning (just to decrease build time)
+                //|| 'true` ensures the pipeline continues even if vulnerabilities are found 
+                //--scanners vuln o disable secret scanning (just to decrease build time)
             }
         }
 
