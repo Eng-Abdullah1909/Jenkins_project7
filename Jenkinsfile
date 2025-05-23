@@ -12,13 +12,13 @@ pipeline {
     }
 
     stages {    
-        stage('build-code') {    
-            steps{
-                echo 'Building the code using Maven'               
-                //building the code using Maven build tool        
-                sh 'mvn clean package'
-            }
-        }
+        // stage('build-code') {    
+        //     steps{
+        //         echo 'Building the code using Maven'               
+        //         //building the code using Maven build tool        
+        //         sh 'mvn clean package'
+        //     }
+        // }
 
            
          //stage('SonarQube Analysis') {
@@ -50,13 +50,13 @@ pipeline {
         // }
    
 
-        stage('pushing to dokcer rejestiry'){
-            steps{
-                echo 'pushing the image'               
-                //pushing the image
-                sh 'docker push engabdullah1909/jpetstore-webapp:${BUILD_NUMBER}'
-            }
-        }        
+        // stage('pushing to dokcer rejestiry'){
+        //     steps{
+        //         echo 'pushing the image'               
+        //         //pushing the image
+        //         sh 'docker push engabdullah1909/jpetstore-webapp:${BUILD_NUMBER}'
+        //     }
+        // }        
 
 
         //stage('Security Scan-Trivy') {
