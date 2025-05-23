@@ -12,13 +12,13 @@ pipeline {
     }
 
     stages {    
-        // stage('build-code') {    
-        //     steps{
-        //         echo 'Building the code using Maven'               
-        //         //building the code using Maven build tool        
-        //         sh 'mvn clean package'
-        //     }
-        // }
+        stage('build-code') {    
+            steps{
+                echo 'Building the code using Maven'               
+                //building the code using Maven build tool        
+                sh 'mvn clean package'
+            }
+        }
 
            
          //stage('SonarQube Analysis') {
@@ -42,32 +42,32 @@ pipeline {
         }   
 
    
-        // stage('build-image') {
-        //     steps {
-        //         echo 'Building the image'
-        //         sh "docker build -t engabdullah1909/jpetstore-webapp:${BUILD_NUMBER} ."
-        //     }
-        // }
+        stage('build-image') {
+            steps {
+                echo 'Building the image'
+                sh "docker build -t engabdullah1909/jpetstore-webapp:${BUILD_NUMBER} ."
+            }
+        }
    
 
-        // stage('pushing to dokcer rejestiry'){
-        //     steps{
-        //         echo 'pushing the image'               
-        //         //pushing the image
-        //         sh 'docker push engabdullah1909/jpetstore-webapp:${BUILD_NUMBER}'
-        //     }
-        // }        
+        stage('pushing to dokcer rejestiry'){
+            steps{
+                echo 'pushing the image'               
+                //pushing the image
+                sh 'docker push engabdullah1909/jpetstore-webapp:${BUILD_NUMBER}'
+            }
+        }        
 
 
-        //stage('Security Scan-Trivy') {
-            //steps {
-                //echo 'Running Trivy scan on Docker image'
-                //sh 'trivy image --exit-code 1 --severity HIGH --format table --output trivy-report.txt --scanners vuln engabdullah1909/jpetstore-webapp || true'
+        stage('Security Scan - Trivy Docker image') {
+            steps {
+                echo 'Running Trivy scan on Docker image'
+                sh 'trivy image --exit-code 1 --severity HIGH --format table --output trivy-report.txt --scanners vuln engabdullah1909/jpetstore-webapp || true'
 
-                // `|| true` ensures the pipeline continues even if vulnerabilities are found 
-                // --scanners vuln o disable secret scanning (just to decrease build time)
-            //}
-        //}
+                `|| true` ensures the pipeline continues even if vulnerabilities are found 
+                --scanners vuln o disable secret scanning (just to decrease build time)
+            }
+        }
 
 
         stage('Deploy to Kubernetes') {
@@ -89,8 +89,8 @@ pipeline {
                 // || true ensures the pipeline doesn't fail even if issues are found.  
                 
 
-    }
-}
+            }
+        }
    
 
     }
