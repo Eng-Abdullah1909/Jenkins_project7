@@ -57,7 +57,7 @@ Before running the pipeline, ensure the following are set up:
 
 8. **Security Scan - Trivy Kubernetes Cluster**  
    Scans the Kubernetes cluster for security issues and outputs a summary report.
-
-
-**Access the Application
+   
+##
+**Access the Application**
 Once deployed, access the application via the Kubernetes service URL.
