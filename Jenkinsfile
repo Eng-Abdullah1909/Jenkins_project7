@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('Docker-Hub-UP')
-        // SCANNER_HOME=tool 'sonar-scanner'
+        SCANNER_HOME=tool 'sonar-scanner'
     }   
 
     tools {
@@ -22,16 +22,16 @@ pipeline {
 
            
          //stage('SonarQube Analysis') {
-            //steps {
-                //withSonarQubeEnv('SonarServer') {
-                //sh ''' 'sonar-scanner' \
-                //-Dsonar.projectName=my-project \
-                //-Dsonar.projectKey=store \
-                //-Dsonar.java.binaries=target/classes \
-                //-Dsonar.sources=. '''
-                //}
-            //}
-        //}
+            steps {
+                withSonarQubeEnv('SonarServer') {
+                sh ''' 'sonar-scanner' \
+                -Dsonar.projectName=my-project \
+                -Dsonar.projectKey=store \
+                -Dsonar.java.binaries=target/classes \
+                -Dsonar.sources=. '''
+                }
+            }
+        }
 
         
         stage('Docker Login') {
