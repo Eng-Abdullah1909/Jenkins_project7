@@ -49,18 +49,19 @@ pipeline {
         stage('Security Test - OWASP ZAP') {
             steps {
                  echo 'Running ZAP baseline scan against app in Minikube'
-                  sh '''
-                   mkdir -p /tmp/zap
+                          sh '''
+                          OUTPUT_DIR=/tmp/zap-output
+                          mkdir -p $OUTPUT_DIR
+                          chmod 777 $OUTPUT_DIR
 
-                   APP_URL=http://$(minikube ip):30088
+                          APP_URL=http://$(minikube ip):30088
 
-                  docker run --rm -v /tmp/zap:/zap/wrk \
-                  ghcr.io/zaproxy/zaproxy:stable zap-baseline.py \
-                  -t $APP_URL \
-                  -g gen.conf -r zap-report.html || true
+                          docker run --rm -v $OUTPUT_DIR:/zap/wrk \
+                          ghcr.io/zaproxy/zaproxy:stable zap-baseline.py \
+                          -t $APP_URL -g gen.conf -r zap-report.html || true
 
-                  cp /tmp/zap/zap-report.html ./zap-report.html || true
-                  '''
+                          cp $OUTPUT_DIR/zap-report.html ./zap-report.html || true
+                          '''
             }
         }
 
