@@ -1,6 +1,7 @@
 # CI/CD Pipeline with Jenkins, Kubernetes, SonarQube, and Trivy
 
 This project demonstrates a comprehensive CI/CD pipeline using Jenkins, integrating tools like SonarQube for code quality analysis, Trivy for security scanning, and deploying a Java-based application to a Kubernetes cluster.
+![Developer](https://github.com/user-attachments/assets/50cc4605-ed44-4d22-9466-8cec50e948f9)
 
 ## Overview
 
@@ -12,6 +13,7 @@ The pipeline automates the following processes:
 4. **Docker Image Push**: Pushes the Docker image to Docker Hub.
 5. **Security Scanning**: Scans the Docker image and Kubernetes cluster using Trivy.
 6. **Deployment**: Deploys the application to a Kubernetes cluster using `kubectl`.
+7. **Pentesting**: Applying safe attacks on the application to test vulnerability points .
 
 ## Features
 
