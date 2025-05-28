@@ -91,7 +91,30 @@ pipeline {
 
             }
         }
-   
+
+
+        stage('Security Test - OWASP ZAP') {
+            steps {
+                echo 'Running ZAP baseline scan against app in Minikube'
+                sh '''
+                APP_URL=http://$(minikube ip):30088
+
+                docker run --rm -v $(pwd):/zap/wrk/:rw \
+                ghcr.io/zaproxy/zaproxy:stable zap-baseline.py \
+                -t $APP_URL \
+                -g gen.conf -r zap-report.html || true
+                '''
+            }
+        }
+
+
+        post {
+            always {
+                archiveArtifacts artifacts: 'zap-report.html', onlyIfSuccessful: false
+            }
+        }
+
+        // To Archive  ZAP Report in Jenkins
 
     }
 
